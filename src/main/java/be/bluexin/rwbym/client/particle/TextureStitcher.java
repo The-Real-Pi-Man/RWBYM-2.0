@@ -9,8 +9,6 @@ public class TextureStitcher
     @SubscribeEvent
     public void stitcherEventPre(TextureStitchEvent.Pre event) {
         ResourceLocation rosepetalrl = new ResourceLocation("rwbym:entity/rosepetal");
-        ResourceLocation summerpetalrl = new ResourceLocation("rwbym:entity/summerpetal");
         event.getMap().registerSprite(rosepetalrl);
-        event.getMap().registerSprite(summerpetalrl);
     }
 }

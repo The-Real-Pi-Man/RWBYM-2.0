@@ -2,7 +2,10 @@ package be.bluexin.rwbym.capabilities.Blake;
 
 import be.bluexin.rwbym.Init.RWBYItems;
 import be.bluexin.rwbym.RWBYModels;
-import be.bluexin.rwbym.entity.*;
+import be.bluexin.rwbym.entity.EntityBeowolf;
+import be.bluexin.rwbym.entity.EntityBlakeFire;
+import be.bluexin.rwbym.entity.EntityBlakeIce;
+import be.bluexin.rwbym.entity.EntityWinterBeowolf;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -53,11 +56,7 @@ public class Blake implements IBlake {
 
 	@Override
 	public void onUpdate(EntityPlayer player) {
-
-		if(this.level >3){
-			this.level = 3;
-		}
-
+		
 		if (!player.onGround) {
 			airTime++;
 		}
@@ -69,7 +68,6 @@ public class Blake implements IBlake {
 			if (active > 8) {
 				if (player.world.isRemote) {
 					Vec3d motion = new Vec3d(player.motionX, player.motionY, player.motionZ);
-					
 					if (motion.lengthSquared() > 0.01 && airTime < 8) {
 						motion = motion.normalize();
 						motion = motion.scale(1.5D);
@@ -82,19 +80,12 @@ public class Blake implements IBlake {
 						player.motionY = motion.y/4;
 						player.motionZ = motion.z;
 					}
-					else if (player.onGround) {
+					else {
 						motion = player.getLookVec();
 						motion = motion.scale(2D);
 						player.motionX = -motion.x;
 						player.motionY = -motion.y;
 						player.motionZ = -motion.z;
-					}
-					else {
-						motion = player.getLookVec();
-						motion = motion.scale(2D);
-						player.motionX = motion.x;
-						player.motionY = motion.y;
-						player.motionZ = motion.z;
 					}
 				}
 			}
@@ -165,27 +156,18 @@ public class Blake implements IBlake {
 		// TODO for Blaez to spawn a shadow player (this function is already check to be called on server only)
 		ItemStack is = player.getHeldItemOffhand();
 		if(is.getItem() == RWBYItems.firedust){
-			BlockPos blockpos = (new BlockPos(player));
-			EntityBlakeFire entityBlakeFire = new EntityBlakeFire(player.world);
-			entityBlakeFire.moveToBlockPosAndAngles(blockpos, player.rotationYaw, player.rotationPitch);
-			entityBlakeFire.setOwner(player);
-			player.world.spawnEntity(entityBlakeFire);
-			if (!player.capabilities.isCreativeMode) {
-				is.shrink(1);
-			}
-		}else if(is.getItem() == RWBYItems.icedust){
+		BlockPos blockpos = (new BlockPos(player));
+		EntityBlakeFire entityBlakeFire = new EntityBlakeFire(player.world);
+		entityBlakeFire.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
+		player.world.spawnEntity(entityBlakeFire);
+		is.shrink(1);
+		}
+		if(is.getItem() == RWBYItems.icedust){
 			BlockPos blockpos = (new BlockPos(player));
 			EntityBlakeIce entityBlakeIce = new EntityBlakeIce(player.world);
 			entityBlakeIce.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
 			player.world.spawnEntity(entityBlakeIce);
-			if (!player.capabilities.isCreativeMode) {
-				is.shrink(1);
-			}
-		}else {
-			BlockPos blockpos = (new BlockPos(player));
-			EntityBlake entityBlake = new EntityBlake(player.world);
-			entityBlake.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-			player.world.spawnEntity(entityBlake);
+			is.shrink(1);
 		}
 	}
 	
