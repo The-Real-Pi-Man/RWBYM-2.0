@@ -1,7 +1,9 @@
 package be.bluexin.rwbym.capabilities.Weiss;
 
 import be.bluexin.rwbym.RWBYModels;
-import be.bluexin.rwbym.entity.*;
+import be.bluexin.rwbym.entity.EntityBeowolf;
+import be.bluexin.rwbym.entity.EntityWinterBeowolf;
+import be.bluexin.rwbym.entity.EntityWinterBoarbatusk;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -18,26 +20,9 @@ public class Weiss implements IWeiss {
 	public boolean onActivate(EntityPlayer player) {
 		
 		RWBYModels.LOGGER.log(RWBYModels.debug, "Weiss Activated");
-
-		if(this.level >4){
-			this.level = 4;
-		}
 		
 		switch(this.level) {
-			case 1:
-				if (this.cooldown > 0) {
-					return false;
-				}
-				else if (player.onGround && !player.world.isRemote){
-					BlockPos blockpos = (new BlockPos(player));
-					EntityWinterBoarbatusk entityWinterBoarbatusk = new EntityWinterBoarbatusk(player.world);
-					entityWinterBoarbatusk.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-					player.world.spawnEntity(entityWinterBoarbatusk);
-					this.cooldown = 100;
-					return true;
-				}
-				break;
-		case 2:
+		case 1:
 			if (this.cooldown > 0) {
 				return false;
 			} 
@@ -46,36 +31,23 @@ public class Weiss implements IWeiss {
 				EntityWinterBeowolf entitybeowolf = new EntityWinterBeowolf(player.world);
 				entitybeowolf.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
 				player.world.spawnEntity(entitybeowolf);
-				this.cooldown = 300;
+				this.cooldown = 100;
 				return true;
 			}	
 			break;
-			case 3:
-				if (this.cooldown > 0) {
-					return false;
-				}
-				else if (player.onGround && !player.world.isRemote){
-					BlockPos blockpos = (new BlockPos(player));
-					EntityWinterUrsa entityWinterUrsa = new EntityWinterUrsa(player.world);
-					entityWinterUrsa.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-					player.world.spawnEntity(entityWinterUrsa);
-					this.cooldown = 500;
-					return true;
-				}
-				break;
-			case 4:
-				if (this.cooldown > 0) {
-					return false;
-				}
-				else if (player.onGround && !player.world.isRemote){
-					BlockPos blockpos = (new BlockPos(player));
-					EntityWinterArmorgeist entityWinterArmorgeist = new EntityWinterArmorgeist(player.world);
-					entityWinterArmorgeist.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-					player.world.spawnEntity(entityWinterArmorgeist);
-					this.cooldown = 1200;
-					return true;
-				}
-				break;
+		case 2:
+			if (this.cooldown > 0) {
+				return false;
+			}
+			else if (player.onGround && !player.world.isRemote){
+				BlockPos blockpos = (new BlockPos(player));
+				EntityWinterBoarbatusk entityWinterBoarbatusk = new EntityWinterBoarbatusk(player.world);
+				entityWinterBoarbatusk.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
+				player.world.spawnEntity(entityWinterBoarbatusk);
+				this.cooldown = 100;
+				return true;
+			}
+			break;
 			
 		default:
 			return false;
@@ -97,17 +69,7 @@ public class Weiss implements IWeiss {
 				this.cooldown--;
 			}
 		case 2:
-			if (this.cooldown > 0) {
-				this.cooldown--;
-			}
-			case 3:
-				if (this.cooldown > 0) {
-					this.cooldown--;
-				}
-			case 4:
-				if (this.cooldown > 0) {
-					this.cooldown--;
-				}
+			break;
 		default:
 			break;
 		}

@@ -29,7 +29,6 @@ import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -93,7 +92,7 @@ public class RWBYAmmoEntity extends EntityArrow { // FIXME: for some reason thes
         this.setNoGravity(!from.obeysGravity());
         this.itemRef = from;
 
-        /*if (from.getPotion() != null) {
+        if (from.getPotion() != null) {
             String[] ps = from.getPotion().split("\\*", -1);
             Potion p = ForgeRegistries.POTIONS.getValue(new ResourceLocation(ps[0]));
             if (p != null){
@@ -109,7 +108,6 @@ public class RWBYAmmoEntity extends EntityArrow { // FIXME: for some reason thes
             }
             else throw new IllegalStateException("Invalid Potion requested: " + new ResourceLocation(ps[0]));
         }
-        */
 
         if (from.getNbt() != null && !world.isRemote) this.nbt = from.getNbt();
     } // TODO: add to dispenser registries (see usage of this constructor in other impl of EntityArrow
@@ -181,6 +179,7 @@ public class RWBYAmmoEntity extends EntityArrow { // FIXME: for some reason thes
         });
         super.setDead();
     }
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -188,9 +187,6 @@ public class RWBYAmmoEntity extends EntityArrow { // FIXME: for some reason thes
             this.maxMotionX = this.motionX;
             this.maxMotionY = this.motionY;
             this.maxMotionZ = this.motionZ;
-
-
-
 
             if (nbt.hasKey("Passengers", 9)) {
                 NBTTagList nbttaglist = nbt.getTagList("Passengers", 10);

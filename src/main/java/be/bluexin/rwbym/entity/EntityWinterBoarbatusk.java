@@ -1,28 +1,35 @@
 package be.bluexin.rwbym.entity;
 
+import be.bluexin.rwbym.ModLootTables;
 import com.google.common.base.Predicate;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityBlakeIce extends EntityGolem {
+public class EntityWinterBoarbatusk extends EntityGolem {
     World world = null;
     private int counter;
     @Nullable
-    public EntityBlakeIce(World var1) {
+
+    public EntityWinterBoarbatusk(World var1) {
         super(var1);
         world = var1;
-        this.setSize(1.5F, 1.5F);
+        this.setSize(1.95F, 1.95F);
     }
 
 
@@ -51,7 +58,7 @@ public class EntityBlakeIce extends EntityGolem {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3499999940395355D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(12.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
     }
 
     public boolean attackEntityAsMob(Entity entityIn)
@@ -65,43 +72,33 @@ public class EntityBlakeIce extends EntityGolem {
             this.applyEnchantments(this, entityIn);
         }
 
-        this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_WEAK, 1.0F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
         return flag;
     }
 
-    @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (!this.world.isRemote)
-        {
-        EntityAreaEffectCloud cloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
-        cloud.addEffect(new PotionEffect(MobEffects.SLOWNESS, 300, 55));
-        cloud.setColor(0xccffff);
-        cloud.setDuration(60);
-        cloud.setRadius(3);
-        cloud.setWaitTime(10);
-        world.spawnEntity(cloud);
-        }
-    }
+
+
 
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ILLAGER;
     }
 
+
     protected SoundEvent getAmbientSound() {
-        return null;
+        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
     }
 
     protected SoundEvent getHurtSound() {
-        return SoundEvents.ENTITY_PLAYER_HURT;
+        return SoundEvents.ENTITY_ZOMBIE_PIG_HURT;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_PLAYER_DEATH;
+        return SoundEvents.ENTITY_ZOMBIE_PIG_DEATH;
     }
 
     @Override
     protected float getSoundVolume() {
         return 1.0F;
     }
+
 }

@@ -17,8 +17,6 @@ public class RegUtil {
     public static void registerAll(FMLPreInitializationEvent event){
         //Icon
         registerItems(event, RWBYItems.icon);
-        registerItems(event, RWBYItems.armasword);
-        registerItems(event, RWBYItems.armaswordsummon);
         //Blocks
         registerBlocks(event, RWBYItems.rwbyblock1);
         registerBlocks(event, RWBYItems.rwbyblock2);
@@ -32,8 +30,6 @@ public class RegUtil {
 
         //Weapons
         registerItems(event, RWBYItems.crescent);
-        registerItems(event, RWBYItems.crescentfrost);
-        registerItems(event, RWBYItems.crescentgunfrost);
         registerItems(event, RWBYItems.weiss);
         registerItems(event, RWBYItems.gambol);
         registerItems(event, RWBYItems.ember);
@@ -92,8 +88,6 @@ public class RegUtil {
         registerItems(event, RWBYItems.kkfire);
         registerItems(event, RWBYItems.kkice);
         registerItems(event, RWBYItems.kkwind);
-        registerItems(event, RWBYItems.chatareus);
-        registerItems(event, RWBYItems.chatareusgun);
         registerItems(event, RWBYItems.mariacane);
         registerItems(event, RWBYItems.mariascythe);
         registerItems(event, RWBYItems.mariascythedouble);
@@ -125,7 +119,6 @@ public class RegUtil {
         registerItems(event, RWBYItems.frostediron);
         registerItems(event, RWBYItems.shadowiron);
         registerItems(event, RWBYItems.gildediron);
-        registerItems(event, RWBYItems.viridianiron);
         registerItems(event, RWBYItems.cr1);
         registerItems(event, RWBYItems.cr2);
         registerItems(event, RWBYItems.cr3);
@@ -159,10 +152,6 @@ public class RegUtil {
         registerItems(event, RWBYItems.stor6);
         registerItems(event, RWBYItems.scrap);
         registerItems(event, RWBYItems.atlasknight);
-        registerItems(event, RWBYItems.coinr);
-        registerItems(event, RWBYItems.coinw);
-        registerItems(event, RWBYItems.coinb);
-        registerItems(event, RWBYItems.coiny);
         //Armour
         registerItems(event, RWBYItems.korekosmouoff);
         registerItems(event, RWBYItems.korekosmoufire);
